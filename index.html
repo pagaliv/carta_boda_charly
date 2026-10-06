@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo a la carta...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #8B0000, #600000);
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .loading {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .manual-link {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: white;
+            color: #8B0000;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loading">🔄 Cargando carta de la boda...</div>
+        <div class="spinner"></div>
+        <p>Si la redirección no funciona automáticamente:</p>
+        <a href="carta-boda-charly.pdf" id="manualLink" class="manual-link">Abrir carta manualmente</a>
+    </div>
+
+    <script>
+        const PDF_NAME = 'carta-boda-charly.pdf';
+
+        function redirectToPdf() {
+            window.location.href = PDF_NAME;
+
+            setTimeout(() => {
+                document.querySelector('.loading').textContent = '⚠️ Redirección automática falló';
+                document.querySelector('p').style.display = 'block';
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', redirectToPdf);
+        document.body.addEventListener('click', redirectToPdf);
+    </script>
+</body>
+</html>
